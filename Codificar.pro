@@ -5,11 +5,13 @@ CONFIG -= qt
 
 SOURCES += \
         arch.cpp \
+        cajero.cpp \
         cod.cpp \
         deco.cpp \
         main.cpp
 
 HEADERS += \
     arch.h \
+    cajero.h \
     cod.h \
     deco.h

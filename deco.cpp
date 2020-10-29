@@ -1,22 +1,24 @@
 #include "deco.h"
 
-void decod(string name, int method, int n)
+void decod(string name, int method, int n, int ej)
 {
     string texto,encrip,decodificado,binar;
     encrip=leer_txt(name);
     binar=txt2binar(encrip);
     decodificado=parti(binar,n);
     texto=bin2txt(decodificado);
-    cout << "El archivo en binario es:" << endl;
-    cout << binar << endl;
-    cout << "El archivo decodificado es: " << endl;
-    cout << decodificado << endl;
-    cout << "El archivo de texto es: " << endl;
-    cout << texto << endl;
-    cout << endl;
-    cout << "Revisar el archivo 'Decodificado.txt'." << endl;
-    cout << "Revisar el archivo 'Caracteres_finales.txt'." << endl;
-    cout << endl;
+    if (ej==1) {
+        cout << "El archivo en binario es:" << endl;
+        cout << binar << endl;
+        cout << "El archivo decodificado es: " << endl;
+        cout << decodificado << endl;
+        cout << "El archivo de texto es: " << endl;
+        cout << texto << endl;
+        cout << endl;
+        cout << "Revisar el archivo 'Decodificado.txt'." << endl;
+        cout << "Revisar el archivo 'Caracteres_finales.txt'." << endl;
+        cout << endl;
+    }
     escr_txt("Decodificado.txt",decodificado);
     escr_txt("Caracteres_finales.txt",texto);
 }
