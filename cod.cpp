@@ -1,6 +1,6 @@
 #include "cod.h"
 
-void codif(string name, int method, int n)
+void codif(string name, int n)
 {
     string texto,binario,codificado,encrip;
     texto=leer_txt(name);
@@ -126,4 +126,102 @@ string cod2txt(string cod)
         }
     }
     return n_text;
+}
+
+void texto2bin_in_char(char *arreglo, char *arreglo2, unsigned long long tam)
+{
+    unsigned long long j=0;
+    for(unsigned long long i=0;i<tam;i++){
+        unsigned long long k=0;
+        for(;j<(i+1)*8;j++){
+            arreglo2[j]=(char((((arreglo[i]<<k)&(0x80))/128)+48));
+            k++;
+        }
+    }
+}
+
+void codificar_char(char *arreglo2, char *arreglo3, unsigned long long n, unsigned long long tam){
+
+    for(unsigned long long i=0, h=0;i<=tam*8;i++){
+        if(((h+1)*n-1)-(n-1)==i){
+            arreglo3[i]=arreglo2[i+(n-1)];
+            h++;
+        }
+        arreglo3[i+1]=arreglo2[i];
+    }
+
+}
+
+
+void descodificar_char(char *arreglo2, char *arreglo3, unsigned long long n, unsigned long long tam){
+
+    for(unsigned long long i=0, h=0;i<tam*8;i++){
+        arreglo3[i]=arreglo2[i+1];
+
+        if((h+1)*n-1==i){
+            arreglo3[i]=arreglo2[i-(n-1)];
+            h++;
+        }
+
+    }
+}
+
+void charbinario2text(char *arreglo, char *arreglo3, unsigned long long tam){
+    int bin[]={128,64,32,16,8,4,2,1}, digito=0;
+    unsigned long long k=0;
+    for(unsigned long long i=0;i<tam;i++){
+        for(unsigned long long j=0;j<8;j++){
+            digito=digito+((arreglo3[k]-48)*bin[j]);
+            k++;
+        }
+        arreglo[i]=digito;
+        digito=0;
+    }
+    cout<<"Texto decodificado!!"<<endl;
+}
+void charbinario2text2(char *arreglo, char *arreglo3, unsigned long long tam){
+    int bin[]={128,64,32,16,8,4,2,1}, digito=0;
+    unsigned long long k=0;
+    for(unsigned long long i=0;i<tam;i++){
+        for(unsigned long long j=0;j<8;j++){
+            digito=digito+((arreglo3[k]-48)*bin[j]);
+            k++;
+        }
+        arreglo[i]=digito;
+        digito=0;
+    }
+    //cout<<"Texto decodificado!!"<<endl;
+
+}
+
+void codichar(string name){
+    string file;
+    //cout <<"Ingrese nombre con extension del archivo a codificar: ";
+    //cin >> name;
+    cout<<endl;
+    unsigned long long tam;
+    file=leer_txt(name);
+    tam=file.length();
+    char *arreglo = new char [tam];
+    char *arreglo2 = new char [tam*8];
+    char *arreglo3 = new char [tam*8];
+
+    for(unsigned long long i=0;i<tam;i++){   arreglo[i]=file[i];}
+    texto2bin_in_char(arreglo, arreglo2, tam);cout<<endl;
+    //cout<< "Ingrese la semilla: ";
+    int n; // cin >>n;
+    n=4;
+    cout<<endl;
+    codificar_char(arreglo2, arreglo3, n, tam); cout<<endl;
+    //cout<<"Ingrese nombre y extension para guardar el archivo: "; cin >> name;
+    name="sudo.dat";
+    cout<<endl;
+    ofstream guardar;
+    guardar.open(name, ios::app);
+    guardar << arreglo3;
+    guardar.close();
+
+    delete [] arreglo;
+    delete [] arreglo2;
+    delete [] arreglo3;
 }

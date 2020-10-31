@@ -4,6 +4,13 @@
 #include <fstream>
 #include <string>
 #include <math.h>
+#include <string>
+#include <conio.h>
+#include <string.h>
+#include <math.h>
+#include <stdio.h>
+//#include <cstdlib>
+//#include <cstdio>
 
 using namespace std;
 

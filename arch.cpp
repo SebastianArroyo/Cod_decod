@@ -11,7 +11,7 @@ string leer_txt(string name)
 {
     long long int tam;
     string data="";
-    fstream k(name,fstream::in | fstream::ate);
+    fstream k(name,fstream::in | fstream::ate );
     if(k.is_open()) {
         tam = k.tellg();
         k.seekg(0);
