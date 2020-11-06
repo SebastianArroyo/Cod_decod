@@ -2,7 +2,7 @@
 #define COD_H
 #include "arch.h"
 
-void codif(string name, int n);
+void codif(string name, int n, int caso);
 string txt2bin(string texto);
 string particion(string binario, int n);
 string cod2txt(string part);

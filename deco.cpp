@@ -1,26 +1,31 @@
-
 #include "deco.h"
 #include "cod.h"
 
-void decod(string name, int n)
+void decod(string name, int n,int e)
 {
     string texto,encrip,decodificado,binar;
     encrip=leer_txt(name);
     binar=txt2binar(encrip);
     decodificado=parti(binar,n);
     texto=bin2txt(decodificado);
-    cout << "El archivo en binario es:" << endl;
-    cout << binar << endl;
-    cout << "El archivo decodificado es: " << endl;
-    cout << decodificado << endl;
-    cout << "El archivo de texto es: " << endl;
-    cout << texto << endl;
-    cout << endl;
-    cout << "Revisar el archivo 'Decodificado.txt'." << endl;
-    cout << "Revisar el archivo 'Caracteres_finales.txt'." << endl;
-    cout << endl;
-    escr_txt("Decodificado.txt",decodificado);
-    escr_txt("Caracteres_finales.txt",texto);
+    if (e==2) {
+        escr_txt("Decodificado.txt",decodificado);
+        escr_txt("Caracteres_finales.txt",texto);
+    }
+    else {
+        cout << "El archivo en binario es:" << endl;
+        cout << binar << endl;
+        cout << "El archivo decodificado es: " << endl;
+        cout << decodificado << endl;
+        cout << "El archivo de texto es: " << endl;
+        cout << texto << endl;
+        cout << endl;
+        cout << "Revisar el archivo 'Decodificado.txt'." << endl;
+        cout << "Revisar el archivo 'Caracteres_finales.txt'." << endl;
+        cout << endl;
+        escr_txt("Decodificado.txt",decodificado);
+        escr_txt("Caracteres_finales.txt",texto);
+    }
 }
 string txt2binar(string carac)
 {
@@ -117,6 +122,9 @@ string bin2txt(string deco)
     for (unsigned long long int i=0,k=0;i<deco.length();i++) {
         partido.push_back(deco[i]);
         if ((k+1)*8-1==i) {
+            if (partido=="11111111") {
+                break;
+            }
             for (num=0,sum=0,pot=7,c=0;c<8;c++,pot--) {
                 num=(int(partido[c])-48)*(pow(2,pot));
                 sum+=num;

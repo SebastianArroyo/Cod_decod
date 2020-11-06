@@ -1,23 +1,32 @@
 #include "cod.h"
 
-void codif(string name, int n)
+void codif(string name, int n, int caso)
 {
-    string texto,binario,codificado,encrip;
+    string texto,binario,codificado,encrip, n_arch;
     texto=leer_txt(name);
     binario=txt2bin(texto);
     codificado=particion(binario,n);
     encrip=cod2txt(codificado);
-    cout << "El archivo en binario es: " << endl;
-    cout << binario << endl;
-    cout << "El archivo codificado es: " << endl;
-    cout << codificado << endl;
-    cout << "El archivo encriptado es: " << endl;
-    cout << encrip << endl;
-    cout << endl;
-    cout << "Revisar el archivo 'Codificado.txt'." << endl;
-    cout << "Revisar el archivo 'Encriptado.txt'." << endl;
-    escr_txt("Codificado.txt",codificado);
-    escr_txt("Encriptado.txt",encrip);
+    if (caso==1) {
+        cout << "El archivo en binario es: " << endl;
+        cout << binario << endl;
+        cout << "El archivo codificado es: " << endl;
+        cout << codificado << endl;
+        cout << "El archivo encriptado es: " << endl;
+        cout << encrip << endl << endl;
+        cout << "Ingrese nombre y extension para guardar el texto encriptado: "; cin >> n_arch;
+        cout << endl;
+        cout << "Revisar el archivo 'Codificado.txt'." << endl;
+        cout << "Revisar el archivo '" << n_arch << "'." << endl;
+        escr_txt("Codificado.txt",codificado);
+        escr_txt(n_arch,encrip);
+        cout << "Codificacion exitosa!" << endl << endl;
+    }
+    else {
+        escr_txt("Codificado.txt",codificado);
+        escr_txt("sudo.txt",encrip);
+    }
+
 }
 
 string txt2bin(string texto)

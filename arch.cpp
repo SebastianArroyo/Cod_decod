@@ -13,9 +13,11 @@ string leer_txt(string name)
     string data="";
     fstream k(name,fstream::in | fstream::ate );
     if(k.is_open()) {
-        tam = k.tellg();
+        tam = k.tellp();
         k.seekg(0);
-        for (long long int i=0;i<tam;i++) data.push_back(k.get());
+        for (long long int i=0;i<tam;i++) {
+            data.push_back(k.get());
+        }
     }
     else cout << "No existe." << endl;
     k.close();
